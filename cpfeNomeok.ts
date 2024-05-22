@@ -5,10 +5,10 @@ class Pessoa {
         this.cpf = cpf;
     }
 }
-//metodo estatico validação
+//metodo estatico para validação
 class PessoaUtils {
     static validarCPF(cpf: string): string {
-        cpf = cpf.replace(/[^\d]+/g, ''); // Remove o que não e numero
+        cpf = cpf.replace(/[^\d]+/g, ''); // Remove o que não é numero
 
         if (cpf.length !== 11) {
             return "CPF inválido";
@@ -43,7 +43,7 @@ class PessoaUtils {
     }
 }
 
-// Exemplo de uso:
+// Ex:.
 const pessoa = new Pessoa("123.456.789-09");
-console.log(PessoaUtils.validarCPF(pessoa.cpf)); // CPF inválido
+console.log(PessoaUtils.validarCPF(pessoa.cpf)); // vendo se é invalido
 

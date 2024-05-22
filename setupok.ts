@@ -1,15 +1,15 @@
-class Setup {
-    // estaticos
+class Configuracao {
+    // Propriedades estáticas
     static resolucao: string;
     static dificuldade: string;
     static raytracing: boolean;
 
-    //as opçoes
+    // Opções disponíveis
     static resolucoesDisponiveis: string[] = ['HD', 'FullHD', '2K', '4K'];
     static dificuldadesDisponiveis: string[] = ['Facil', 'Normal', 'Dificil'];
     static raytracingDisponiveis: boolean[] = [true, false];
 
-    // metodo
+    // Método para configurar
     static configurar(resolucao: string, dificuldade: string, raytracing: boolean): void {
         if (this.resolucoesDisponiveis.includes(resolucao)) {
             this.resolucao = resolucao;
@@ -30,28 +30,43 @@ class Setup {
         }
     }
 
-    //listar as configuraçoes atuais
+    // Método para listar as configurações atuais
     static listarConfiguracoes(): void {
         console.log(`Resolução: ${this.resolucao}`);
         console.log(`Dificuldade: ${this.dificuldade}`);
         console.log(`Raytracing: ${this.raytracing}`);
     }
 
-    // metodo para configurar usando prompt
+    // Método para configurar usando prompt
     static configurarComPrompt(): void {
         const resolucao = prompt("Escolha a resolução (HD, FullHD, 2K, 4K):");
+        if (resolucao === null) {
+            console.error("Entrada de resolução inválida.");
+            return;
+        }
+
         const dificuldade = prompt("Escolha a dificuldade (Facil, Normal, Dificil):");
-        const raytracing = prompt("Ativar Raytracing? (true, false):") === 'true';
+        if (dificuldade === null) {
+            console.error("Entrada de dificuldade inválida.");
+            return;
+        }
+
+        const raytracingStr = prompt("Ativar Raytracing? (true, false):");
+        if (raytracingStr === null) {
+            console.error("Entrada de raytracing inválida.");
+            return;
+        }
+        const raytracing = raytracingStr === 'true';
 
         try {
             this.configurar(resolucao, dificuldade, raytracing);
-        } catch (error) {
+        } catch (error: any) {
             console.error(error.message);
         }
     }
 }
 
-
-
-
+// Testando a classe
+Configuracao.configurarComPrompt();
+Configuracao.listarConfiguracoes();
 
